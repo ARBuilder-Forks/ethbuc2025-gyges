@@ -1,6 +1,8 @@
 #![cfg_attr(not(any(test, feature = "export-abi")), no_main)]
 extern crate alloc;
 
+
+use alloc::{vec, vec::Vec};
 use alloy_primitives::*;
 use alloy_sol_types::sol;
 use stylus_sdk::prelude::*;

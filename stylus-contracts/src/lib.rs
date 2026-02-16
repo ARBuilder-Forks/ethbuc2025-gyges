@@ -3,11 +3,10 @@
 extern crate alloc;
 
 
-use alloc::{vec, vec::Vec};
+use alloc::{string::{String, ToString}, vec, vec::Vec};
 use alloy_primitives::*;
 use alloy_sol_types::sol;
 use stylus_sdk::prelude::*;
-use stylus_sdk::stylus_core::log;
 
 sol_storage! {
     #[entrypoint]
@@ -46,7 +45,7 @@ pub enum GygesError {
 #[public]
 impl Gyges {
     pub fn register_username(&mut self, username: String) -> Result<(), GygesError> {
-        if self.usernames.getter(username.clone()).get() != Address::new([0; 20]) {
+        if self.usernames.get(username.clone()) != Address::new([0; 20]) {
             return Err(GygesError::InvalidOperation(InvalidOperation {
                 message: "User already exists".to_string(),
             }));

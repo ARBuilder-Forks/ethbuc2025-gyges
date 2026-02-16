@@ -1,4 +1,5 @@
 #![cfg_attr(not(any(test, feature = "export-abi")), no_main)]
+#![cfg_attr(not(any(test, feature = "export-abi")), no_std)]
 extern crate alloc;
 
 
@@ -134,9 +135,7 @@ impl Gyges {
             .set(player_two_nbg.wrapping_add(U256::from(1)));
         player_two.game_ids.setter(player_two_nbg).set(game_id);
 
-        log(
-            self.vm(),
-            Created {
+        self.vm().log(Created {
                 game_id,
                 player_one: sender,
                 player_two: opponent_addr,
@@ -373,9 +372,7 @@ impl Gyges {
             .state
             .set(FixedBytes::from_slice(&new_state));
 
-        log(
-            self.vm(),
-            Played {
+        self.vm().log(Played {
                 game_id,
                 player: sender,
                 action,
